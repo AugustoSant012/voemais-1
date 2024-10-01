@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 export default function Page() {
 
     const [empresas, setEmpresas] = useState([])
+    
     useEffect(() => {
         setEmpresas(JSON.parse(localStorage.getItem('empresas')) || [])
     }, [])
@@ -49,10 +50,14 @@ export default function Page() {
                         <tr key={item.id}>
                             <td>
 
+                            <Link href={`/empresas/edit/${item.id}`}>
                                 <FaPen className="ms-2 me-2 text-primary" title="Editar" />
+                                </Link>
+
                                 <FaTrashAlt title="Exluir"
                                     className="text-danger"
                                     onClick={() => excluir(item.id)} />
+                                    
                             </td>
                             <td>{item.nome}</td>
                             <td>
