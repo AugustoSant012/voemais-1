@@ -1,74 +1,68 @@
-'use client'
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
-import Pagina from "@/components/Pagina"
-import Link from "next/link"
-import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap"
-import { FaPlusCircle } from "react-icons/fa";
-import { FaRegEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+function HorizontalExample() {
+  return (
+    <Form>
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
+        <Form.Label column sm={2}>
+          Email
+        </Form.Label>
+        <Col sm={10}>
+          <Form.Control type="email" placeholder="Email" />
+        </Col>
+      </Form.Group>
 
-export default function Page() {
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword">
+        <Form.Label column sm={2}>
+          Password
+        </Form.Label>
+        <Col sm={10}>
+          <Form.Control type="password" placeholder="Password" />
+        </Col>
+      </Form.Group>
+      <fieldset>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label as="legend" column sm={2}>
+            Radios
+          </Form.Label>
+          <Col sm={10}>
+            <Form.Check
+              type="radio"
+              label="first radio"
+              name="formHorizontalRadios"
+              id="formHorizontalRadios1"
+            />
+            <Form.Check
+              type="radio"
+              label="second radio"
+              name="formHorizontalRadios"
+              id="formHorizontalRadios2"
+            />
+            <Form.Check
+              type="radio"
+              label="third radio"
+              name="formHorizontalRadios"
+              id="formHorizontalRadios3"
+            />
+          </Col>
+        </Form.Group>
+      </fieldset>
+      <Form.Group as={Row} className="mb-3" controlId="formHorizontalCheck">
+        <Col sm={{ span: 10, offset: 2 }}>
+          <Form.Check label="Remember me" />
+        </Col>
+      </Form.Group>
 
-    const [voos, setVoos] = useState([])
-
-    useEffect(() => {
-        setVoos(JSON.parse(localStorage.getItem('voos')) || [])
-    }, [])
-
-    function excluir(id) {
-        if (confirm('Deseja realmente excluir o registro?')) {
-            const dados = voos.filter(item => item.id != id)
-            localStorage.setItem('voos', JSON.stringify(dados))
-            setVoos(dados)
-        }
-    }
-
-    return (
-        <Pagina titulo="Voos">
-
-            <Link
-                href="/voos/form"
-                className="btn btn-primary mb-3"
-            >
-                <FaPlusCircle /> Novo
-            </Link>
-
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Identificador</th>
-                        <th>Dt. Embarque</th>
-                        <th>Origem</th>
-                        <th>Destino</th>
-                        <th>Empresa</th>
-                        <th>Preço</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {voos.map((item, i) => (
-                        <tr key={item.id}>
-                            <td>
-                                <Link href={`/voos/form/${item.id}`}>
-                                    <FaRegEdit title="Editar" className="text-primary" />
-                                </Link>
-                                <MdDelete
-                                    title="Excluir"
-                                    className="text-danger"
-                                    onClick={() => excluir(item.id)}
-                                />
-                            </td>
-                            <td>{item.identificador}</td>
-                            <td>{item.data_embarque}</td>
-                            <td>{item.origem}</td>
-                            <td>{item.destino}</td>
-                            <td>{item.empresa}</td>
-                            <td>{item.preco}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-        </Pagina>
-    )
+      <Form.Group as={Row} className="mb-3">
+        <Col sm={{ span: 10, offset: 2 }}>
+          <Button type="submit">Sign in</Button>
+        </Col>
+      </Form.Group>
+    </Form>
+  );
 }
+
+export default HorizontalExample;
